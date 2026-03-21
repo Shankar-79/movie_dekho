@@ -7,108 +7,33 @@
 
 <link rel="stylesheet" href="../css/navbar.css">
 <link rel="stylesheet" href="../css/home.css">
+<link rel="shortcut icon" href="../assets/img/favicon.png" types="image/x-icon">
 
 
 
 </head>
 <body>
 
-<div id="navbar-container"></div>
-
-
-<main class="container">
-
-<h2 class="section-title">Trending Movies/Shows</h2>
+ <div id="navbar-container"></div>
 
 <section class="hero-section">
+   
+  <div class="hero-card" id="heroCard">
+    
+    <div class="hero-content">
+      <h1 id="heroTitle"></h1>
 
-<div class="slider">
+      <p id="heroInfo"></p>
 
-<button class="arrow left">&#10094;</button>
+      <p id="heroDesc"></p>
 
-<div class="slide active">
-<img src="../assets/1200x675.jpg">
-<div class="info">
-<h3>Spiderman no way home</h3>
-<p>Genre: Action, Adventure, Fantasy</p>
-<p>⭐ 8.2</p>
-</div>
-</div>
+      <div class="hero-buttons">
+        <button class="details-btn">View Details</button>
+        <button class="review-btn">Read Reviews</button>
+      </div>
+    </div>
 
-<div class="slide">
-<img src="../assets/addy-spartacus-hzTRJK4iWTI-unsplash.jpg">
-<div class="info">
-<h3>Deadpool and Wolverine</h3>
-<p>Genre: Action, Adventure, Comedy</p>
-<p>⭐ 8.4</p>
-</div>
-</div>
-
-<div class="slide">
-<img src="../assets/sumeet-b---WQ_E8gIcU-unsplash.jpg">
-<div class="info">
-<h3>Caption America The Winter Soldier</h3>
-<p>Genre: Action, Adventure, Sci-Fi</p>
-<p>⭐ 9.0</p>
-</div>
-</div>
-
-<button class="arrow right">&#10095;</button>
-
-<div class="dots">
-<span class="dot active"></span>
-<span class="dot"></span>
-<span class="dot"></span>
-</div>
-
-</div>
-
-
-<!-- SIDEBAR -->
-<aside class="sidebar">
-
-<h3>Top Rated Shows</h3>
-
-<div class="item">
-
-<img src="../assets/jeet-dhanoa-tGHkC5ntUGc-unsplash.jpg">
-
-<div class="item-text">
-<p>Name: The book of never ending lies</p>
-<p>Rating: ⭐⭐⭐⭐⭐</p>
-</div>
-
-<div class="menu">⋮</div>
-
-</div>
-
-<div class="item">
-
-<img src="../assets/jeet-dhanoa-tGHkC5ntUGc-unsplash.jpg">
-
-<div class="item-text">
-<p>Name: The book of never ending lies</p>
-<p>Rating: ⭐⭐⭐⭐⭐</p>
-</div>
-
-<div class="menu">⋮</div>
-
-</div>
-<div class="item">
-
-<img src="../assets/jeet-dhanoa-tGHkC5ntUGc-unsplash.jpg">
-
-<div class="item-text">
-<p>Name: The book of never ending lies</p>
-<p>Rating: ⭐⭐⭐⭐</p>
-</div>
-
-<div class="menu">⋮</div>
-
-</div>
-
-</aside>
-
+  </div>
 </section>
 
 
@@ -122,17 +47,20 @@
 
 </section>
 
-<section class="theatre">
+<<section class="theatre">
 
-<h2 class="section-title">Opening This Week</h2>
-<div class="opening" id="openingRow"></div>
+  <h2 class="section-title">Opening This Week</h2>
 
-<h2 class="section-title">Popular Movies</h2>
-<div class="movies" id="moviesGrid"></div>
+  <div class="opening" id="openingRow">
+  </div>
+
+  <h2 class="section-title">Top 10 Movies</h2>
+
+  <div class="movies" id="moviesGrid">
+ 
+  </div>
 
 </section>
-</main>
-
 
 <footer class="footer">
 © 2026 MoviesDekho

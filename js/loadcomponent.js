@@ -10,7 +10,7 @@ return response.text();
 .then(data => {
 document.getElementById("navbar-container").innerHTML = data;
 
-const loginBtn = document.getElementById("loginBtn");
+const loginBtn = document.getElementById("profile");
 if(loginBtn){
 loginBtn.addEventListener("click",()=>{
 window.location.href="../pages/login.html";

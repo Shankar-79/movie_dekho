@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Details</title>
+
+<link rel="stylesheet" href="../css/movie.css">
+<link rel="stylesheet" href="../css/navbar.css">
+<link rel="shortcut icon" href="../assets/img/favicon.png" types="image/x-icon">
+  
+</head>
+
+<body>
+
+<div id="navbar-container"></div>
+
+
+<section class="movie-hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 id="title"></h1>
+    <p id="info"></p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Description</h2>
+  <p id="description"></p>
+</section>
+
+
+<section class="section">
+  <h2>Trailer</h2>
+ <div class="trailer-container">
+  <iframe id="trailer" allowfullscreen></iframe>
+</div>
+</section>
+
+
+<section class="section">
+  <h2>Reviews</h2>
+
+  <div id="reviews"></div>
+
+  
+  <div class="rating-input" id="ratingStars">
+    ★★★★★
+  </div>
+
+  <textarea id="reviewInput" placeholder="Write your review..."></textarea>
+  <button id="submitReview">Submit Review</button>
+</section>
+
+
+<section class="section">
+  <h2>Related Movies</h2>
+  <div class="related" id="relatedMovies"></div>
+</section>
+
+<script src="../js/movie.js"></script>
+<script src="../js/loadcomponent.js"></script>
+</body>
+</html>

@@ -1,81 +1,85 @@
-.navbar{
-position:fixed;
-border-radius: 0 0 60px 60px;
-top:0;
-left:0%;
-width:100%;
-height:72px;
-background:rgba(0,0,0);
-display:flex;
-align-items:center;
-padding:0 50px;
-z-index:1000;
-box-sizing:border-box;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 50px;
+  z-index: 1000;
+  transition: 0.3s;
+}
+
+.nav-hidden {
+  transform: translateY(-100%);
+}
+.nav-left {
+  flex: 1;
+}
+
+/* CENTER */
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  list-style: none;
+}
+
+.nav-center li {
+  margin: 0 20px;
+}
+.nav-center li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  transition: 0.3s;
 }
 
 
-.logo{
-color:white;
-font-size:24px;
-font-weight:500;
-white-space:nowrap;
+.nav-center li a:hover::after {
+  width: 100%;
+}
+.nav-center li a:hover {
+  color: rgba(255,255,255,0.7);
+ 
 }
 
-
-.nav-links{
-flex:1;
-display:flex;
-justify-content:center;
-gap:20px;
-
+.nav-center .active {
+  font-weight: bold;
 }
 
-.nav-links a{
-color:white;
-text-decoration:none;
-font-size:18px;
-transition:.3s;
-white-space:nowrap;
+/* RIGHT */
+.nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.nav-links a:hover{
-
-background-color: white;
-color:black;
-border-radius: 20px;
-padding: 5px 15px;
+/* SEARCH */
+.nav-right input {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  margin-right: 15px;
+  transition: 0.3s;
+}
+.nav-right input:focus {
+  background: rgba(255,255,255,0.3);
 }
 
-
-.nav-right{
-display:flex;
-align-items:center;
-gap:15px;
-}
-
-
-.nav-right input{
-width:200px;
-padding:8px 15px;
-border-radius:20px;
-border:none;
-outline:none;
-font-size:14px;
-}
-
-.nav-right button{
-background:transparent;
-border:2px solid white;
-color:white;
-padding:8px 24px;
-border-radius:30px;
-cursor:pointer;
-font-size:14px;
-transition:.3s;
-}
-
-.nav-right button:hover{
-background:black;
-color:white;
-
+/* PROFILE */
+.profile {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }
