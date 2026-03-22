@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("name").textContent = "Name: " + name;
   document.getElementById("email").textContent = "Email: " + email;
 
-  const res = await fetch("../movie.json");
+  const res = await fetch("../data/movie.json");
   const data = await res.json();
 
 

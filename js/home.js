@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadMovies() {
     try {
-      const res = await fetch("../movie.json");
+      const res = await fetch("../data/movie.json");
       const movies = await res.json();
       renderMovies(movies);
     } catch (err) {

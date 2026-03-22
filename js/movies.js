@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-  const res = await fetch("../movie.json");
+  const res = await fetch("../data/movie.json");
   const allData = await res.json();
 
   const movies = allData.filter(m => m.type === "movie");

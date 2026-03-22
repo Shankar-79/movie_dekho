@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const id = new URLSearchParams(location.search).get("id");
 
-  const res = await fetch("../movie.json");
+  const res = await fetch("../data/movie.json");
   const data = await res.json();
 
   let m = data.find(x => x.id == id);
