@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,41 +7,62 @@
 
   <link rel="stylesheet" href="../css/navbar.css">
   <link rel="stylesheet" href="../css/movies.css">
-  <link rel="shortcut icon" href="../assets/img/favicon.png" types="image/x-icon">
-  
+  <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
 </head>
 
 <body class="static-page">
 
- <navbar id="navbar-container" ></navbar>
+<div id="navbar-container"></div>
 
- 
-  <section>
-    <h2 class="section-title">Top 10 Shows</h2>
-    <div class="row" id="top10Row"></div>
-  </section>
 
-  
-  <section>
-    <h2 class="section-title">Trending Shows</h2>
-    <div class="row" id="trendingRow"></div>
-  </section>
+<section>
+  <h2 class="section-title">Top 10 Shows</h2>
+  <div class="row" id="top"></div>
+</section>
 
-  
-  <section>
-    <h2 class="section-title">Latest Shows</h2>
-    <div class="row" id="latestRow"></div>
-  </section>
 
-  <section>
-    <h2 class="section-title">Top Rated Shows</h2>
-    <div class="row" id="topRatedRow"></div>
-  </section>
+<section>
+  <h2 class="section-title">Trending Shows</h2>
+  <div class="row" id="trend"></div>
+</section>
 
- 
-  <section id="categoriesContainer"></section>
 
-  <script src="../js/shows.js"></script>
-  <script src="../js/loadcomponent.js"></script>
+<section>
+  <h2 class="section-title">Latest Shows</h2>
+  <div class="row" id="latest"></div>
+</section>
+
+<section>
+  <h2 class="section-title">Top Rated Shows</h2>
+  <div class="row" id="rated"></div>
+</section>
+
+
+<section id="cat"></section>
+
+
+<template id="card">
+  <div class="movie-card">
+    <img class="poster">
+    <div class="movie-info">
+      <h4 class="title"></h4>
+      <p class="rating"></p>
+      <p class="genre"></p>
+      <span class="review"></span>
+    </div>
+  </div>
+</template>
+
+
+<template id="category">
+  <div class="category-block">
+    <h2 class="section-title cat-title"></h2>
+    <div class="category-row cat-row"></div>
+  </div>
+</template>
+<script src="../js/watchlist.js"></script>
+<script src="../js/loadcomponent.js"></script>
+<script src="../js/shows.js"></script>
+
 </body>
 </html>

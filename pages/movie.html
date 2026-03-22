@@ -7,34 +7,38 @@
 
 <link rel="stylesheet" href="../css/movie.css">
 <link rel="stylesheet" href="../css/navbar.css">
-<link rel="shortcut icon" href="../assets/img/favicon.png" types="image/x-icon">
-  
+<link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
 </head>
 
 <body>
 
-<div id="navbar-container"></div>
+<div id="navbar-container" class="navbar"></div>
 
 
-<section class="movie-hero">
+<section class="movie-hero" id="hero">
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1 id="title"></h1>
-    <p id="info"></p>
+    <h1 id="t"></h1>
+    <p id="i"></p>
+    <div class="hero-content">
+  <h1 id="title"></h1>
+  <p id="info"></p>
+
+ <!--- <button id="wishBtn" class="wish-btn">♡</button>--->
+</div>
   </div>
 </section>
 
+
 <section class="section">
   <h2>Description</h2>
-  <p id="description"></p>
+  <p id="d"></p>
 </section>
-
-
 <section class="section">
   <h2>Trailer</h2>
- <div class="trailer-container">
-  <iframe id="trailer" allowfullscreen></iframe>
-</div>
+  <div class="trailer-container">
+    <iframe id="trailer" allowfullscreen></iframe>
+  </div>
 </section>
 
 
@@ -43,22 +47,30 @@
 
   <div id="reviews"></div>
 
-  
-  <div class="rating-input" id="ratingStars">
-    ★★★★★
-  </div>
+  <div class="rating-input" id="stars"></div>
 
-  <textarea id="reviewInput" placeholder="Write your review..."></textarea>
-  <button id="submitReview">Submit Review</button>
+  <textarea id="inp" placeholder="Write review..."></textarea>
+  <button id="btn">Submit Review</button>
+
+ 
+  <template id="rev-temp">
+    <p></p>
+  </template>
 </section>
 
 
 <section class="section">
   <h2>Related Movies</h2>
-  <div class="related" id="relatedMovies"></div>
-</section>
+  <div class="related" id="rel"></div>
 
+
+  <template id="rel-temp">
+    <img>
+  </template>
+</section>
+<script src="../js/watchlist.js"></script>
 <script src="../js/movie.js"></script>
 <script src="../js/loadcomponent.js"></script>
+
 </body>
 </html>

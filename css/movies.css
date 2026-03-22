@@ -84,7 +84,7 @@ section::after {
   transition: 0.3s ease;
 }
 
-/* IMAGE */
+
 .movie-card img {
   width: 100%;
   height: 250px;
@@ -92,7 +92,7 @@ section::after {
  
 }
 
-/* OVERLAY GRADIENT */
+
 .movie-card::before {
   content: "";
   position: absolute;
@@ -104,7 +104,7 @@ section::after {
   );
 }
 
-/* INFO */
+
 .movie-info {
   position: absolute;
   bottom: 10px;
@@ -116,6 +116,7 @@ section::after {
 .movie-info h4 {
   font-size: 14px;
   margin: 5px 0;
+  color: #ffff;
 }
 
 .movie-info p {

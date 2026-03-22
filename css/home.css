@@ -11,9 +11,6 @@ body{
     background: #000;
 }
 
-
-
-
 .hero-section {
   width: 100%;
   min-height: 100vh;
@@ -120,7 +117,6 @@ padding: top 80px;
 .celebs {
   padding: 60px 50px;
 
-  /* 🔥 cinematic gradient */
   background: linear-gradient(
     to bottom,
     #000000,
@@ -361,7 +357,9 @@ margin-top:60px;
   transform: scale(1.03);
   background: #1a1a1a;
 }
-
+.theatre {
+  padding: 40px 60px;
+}
 @media(max-width:900px){
 
 .hero-section{

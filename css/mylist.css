@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:#000;
+  color:#fff;
+}
+
+
+section{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.section-title{
+  font-size:22px;
+  font-weight:500;
+  margin:30px 20px 10px;
+}
+
+
+
+.profile-box{
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+
+  background:#141414;
+  border-radius: 10px;
+
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+
+  border:1px solid #222;
+}
+
+
+.profile-box div{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.profile-box p{
+  font-size:14px;
+  color:#ccc;
+}
+
+#logout{
+  background:transparent;
+  border:1px solid #555;
+  color:#fff;
+
+  padding:8px 16px;
+  border-radius:5px;
+
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#logout:hover{
+  background:#e50914;
+  border-color:#e50914;
+}
+
+.login-btn{
+  padding:10px 20px;
+  background:#e50914;
+  color:#fff;
+
+  border:none;
+  border-radius:4px;
+
+  font-size:14px;
+  font-weight:500;
+
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.login-btn:hover{
+  background:#f6121d;
+}
+
+.row{
+  width: 90%;
+  margin: auto;
+
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+  gap:20px;
+}
+
+
+.movie-card{
+  position:relative;
+  cursor:pointer;
+  transition:transform 0.3s ease;
+  overflow:hidden;
+}
+.movie-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.2);
+  opacity:0;
+  transition:0.3s;
+}
+
+.movie-card:hover::after{
+  opacity:1;
+}
+.movie-card:hover{
+  transform:scale(1.08);
+  z-index:2;
+}
+
+.movie-card img{
+  width:100%;
+  border-radius:8px;
+}
+
+.movie-info{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+
+  background:linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+
+  padding:10px;
+  opacity:0;
+  transition:0.3s;
+}
+
+.movie-card:hover .movie-info{
+  opacity:1;
+}
+
+.movie-info h4{
+  font-size:14px;
+}
+
+.movie-info p{
+  font-size:12px;
+  opacity:0.8;
+}
+.wish-btn{
+  position:absolute;
+  top:8px;
+  right:8px;
+
+  background:rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+
+  border:none;
+  color:#fff;
+
+  font-size:16px;
+  width:32px;
+  height:32px;
+
+  border-radius:50%;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition:0.3s;
+}
+
+
+.wish-btn:hover{
+  background:#e50914;
+  transform:scale(1.1);
+}
+
+
+.wish-btn.active{
+  color:#e50914;
+}
+
+@media (max-width: 768px){
+
+  .profile-box{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+
+  .row{
+    grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 480px){
+
+  .row{
+    grid-template-columns:repeat(auto-fill, minmax(120px, 1fr));
+  }
+}

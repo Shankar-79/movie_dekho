@@ -2,9 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadMovies() {
     try {
-      const res = await fetch("../movie.json"); 
+      const res = await fetch("../movie.json");
       const movies = await res.json();
-
       renderMovies(movies);
     } catch (err) {
       console.error("Error loading movie data:", err);
@@ -16,108 +15,111 @@ document.addEventListener("DOMContentLoaded", () => {
     const openingRow = document.getElementById("openingRow");
     const moviesGrid = document.getElementById("moviesGrid");
 
-    const trending = [...movies]
-      .sort((a, b) => b.rating - a.rating)
-      .slice(0, 5);
+    const topTemplate = document.getElementById("top-movie-template");
+    const upcomingTemplate = document.getElementById("upcoming-template");
 
-   
-    const upcoming = movies
-  .filter(m => m.year === 2026)
-  .slice(0, 10);
+    const trending = [...movies].sort((a, b) => b.rating - a.rating).slice(0, 5);
+    const latest = [...movies].sort((a, b) => b.year - a.year).slice(0, 5);
+    const upcoming = movies.filter(m => m.year === 2026).slice(0, 10);
+    const top10 = [...movies].sort((a, b) => b.rating - a.rating).slice(0, 10);
 
-    
-    const top10 = [...movies]
-      .sort((a, b) => b.rating - a.rating)
+    const heroMix = [...trending,  ...upcoming]
+      .sort(() => 0.5 - Math.random())
       .slice(0, 10);
-
-    
     const heroCard = document.getElementById("heroCard");
     const heroTitle = document.getElementById("heroTitle");
     const heroInfo = document.getElementById("heroInfo");
     const heroDesc = document.getElementById("heroDesc");
     const heroSection = document.querySelector(".hero-section");
+    const detailsBtn = document.querySelector(".details-btn");
+const reviewBtn = document.querySelector(".review-btn");
 
     let index = 0;
 
+    function updateHero() {
+      const movie = heroMix[index];
 
-   function updateHero() {
-  const movie = trending[index];
+      heroCard.style.opacity = 0;
 
-  heroCard.style.opacity = 0;
+      setTimeout(() => {
 
-  setTimeout(() => {
-    
-    heroTitle.textContent = movie.title;
-    heroInfo.textContent = `⭐ ${movie.rating} • ${movie.year} • ${movie.genre.join(", ")}`;
-    heroDesc.textContent = movie.description;
+        heroTitle.textContent = movie.title;
+        heroInfo.textContent =
+          `⭐ ${movie.rating} • ${movie.year} • ${movie.genre.join(", ")}`;
+        heroDesc.textContent = movie.description;
 
+        heroCard.style.background =
+          `url(${movie.backdrop}) no-repeat center/cover`;
 
-    heroCard.style.background = `
-      url(${movie.backdrop}) no-repeat center/cover
-    `;
+        const [c1, c2] = movie.gradient || ["#0f0c29", "#302b63"];
 
-    
-    const [c1, c2] = movie.gradient || ["#0f0c29", "#302b63"];
+        heroSection.style.background =
+          `linear-gradient(to bottom, ${c1}, ${c2}, #000)`;
+            detailsBtn.onclick = () => {
+      window.location.href = `../pages/movie.html?id=${movie.id}`;
+    };
 
-    heroSection.style.background = `
-      linear-gradient(to bottom, ${c1}, ${c2}, #000)
-    `;
+    reviewBtn.onclick = () => {
+      window.location.href = `../pages/movie.html?id=${movie.id}#reviews`;
+    };
 
-    heroCard.style.opacity = 1;
+        heroCard.style.opacity = 1;
 
-    index = (index + 1) % trending.length;
-  }, 300);
-}
+        index = (index + 1) % heroMix.length;
+
+      }, 300);
+    }
+
     updateHero();
     setInterval(updateHero, 5000);
 
+    if (openingRow) {
+      openingRow.innerHTML = "";
 
+      upcoming.forEach(movie => {
+        const clone = upcomingTemplate.content.cloneNode(true);
 
-if (openingRow) {
-  openingRow.innerHTML = "";
+        const card = clone.querySelector(".upcoming-card");
 
-  upcoming.forEach(movie => {
-    openingRow.innerHTML += `
-      <div class="upcoming-card" 
-          onclick="window.location.href='../pages/movie.html?id=${movie.id}'">
+        clone.querySelector(".upcoming-poster").src = movie.poster;
+        clone.querySelector(".upcoming-title").textContent = movie.title;
+        clone.querySelector(".upcoming-rating").textContent = `⭐ ${movie.rating}`;
 
-        <img src="${movie.poster}" alt="${movie.title}">
-        <div class="upcoming-info">
-          <p>⭐ ${movie.rating}</p>
-          <h4>${movie.title}</h4>
-        </div>
-      </div>
-    `;
-  });
-}
-    
+        card.onclick = () => {
+          window.location.href = `../pages/movie.html?id=${movie.id}`;
+        };
+
+        openingRow.appendChild(clone);
+      });
+    }
+
     if (moviesGrid) {
       moviesGrid.innerHTML = "";
 
       top10.forEach((movie, i) => {
-        moviesGrid.innerHTML += `
-          <div class="top-card"
-              onclick="window.location.href='../pages/movie.html?id=${movie.id}'">
-            <span class="rank-badge">#${i + 1}</span>
+        const clone = topTemplate.content.cloneNode(true);
 
-            <img src="${movie.poster}" alt="${movie.title}">
+        const card = clone.querySelector(".top-card");
 
-            <div class="top-info">
-              <h4>${movie.title}</h4>
-              <p>${movie.year} • ${movie.genre.join(", ")}</p>
-              <p>⭐ ${movie.rating}</p>
-              <p>${movie.description.slice(0, 90)}...</p>
-            </div>
-          </div>
-        `;
+        clone.querySelector(".rank-badge").textContent = `#${i + 1}`;
+        clone.querySelector(".top-poster").src = movie.poster;
+        clone.querySelector(".top-title").textContent = movie.title;
+        clone.querySelector(".top-meta").textContent =
+          `${movie.year} • ${movie.genre.join(", ")}`;
+        clone.querySelector(".top-rating").textContent = `⭐ ${movie.rating}`;
+        clone.querySelector(".top-desc").textContent =
+          movie.description.slice(0, 90) + "...";
+
+        card.onclick = () => {
+          window.location.href = `../pages/movie.html?id=${movie.id}`;
+        };
+
+        moviesGrid.appendChild(clone);
       });
     }
   }
 
   loadMovies();
-
-
-
   const actorsData = [
     { name: "Zendaya", followers: 184000000, img: "zendaya.jpeg" },
     { name: "Tom Holland", followers: 67000000, img: "tomholland.jpeg" },
@@ -137,6 +139,7 @@ if (openingRow) {
   ];
 
   const actorRow = document.querySelector(".celebs-row");
+  const celebTemplate = document.getElementById("celeb-template");
 
   if (actorRow) {
     actorsData.sort((a, b) => b.followers - a.followers);
@@ -146,17 +149,18 @@ if (openingRow) {
     actorRow.innerHTML = "";
 
     topActors.forEach((actor, i) => {
-      actorRow.innerHTML += `
-        <div class="celeb-card">
-          <img src="../assets/actors/${actor.img}" alt="${actor.name}">
-          <div class="plus">+</div>
-          <p class="rank">${i + 1} ▲ ${actor.followers.toLocaleString()}</p>
-          <h4>${actor.name}</h4>
-        </div>
-      `;
+      const clone = celebTemplate.content.cloneNode(true);
+
+      clone.querySelector(".celeb-img").src =
+        `../assets/actors/${actor.img}`;
+
+      clone.querySelector(".rank").textContent =
+        `${i + 1} ▲ ${actor.followers.toLocaleString()}`;
+
+      clone.querySelector(".celeb-name").textContent = actor.name;
+
+      actorRow.appendChild(clone);
     });
   }
 
 });
-
-

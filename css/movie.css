@@ -13,7 +13,6 @@ body {
  
 }
 
-
 .movie-hero {
   height: 70vh;
   position: relative;
@@ -110,4 +109,8 @@ button {
   width: 150px;
   border-radius: 10px;
   cursor: pointer;
+}
+.wish-Btn{
+  position:static;
+  margin-top:10px;
 }

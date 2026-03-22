@@ -1,106 +1,103 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  const id = new URLSearchParams(location.search).get("id");
 
   const res = await fetch("../movie.json");
-  const movies = await res.json();
+  const data = await res.json();
 
-  let movie = movies.find(m => m.id == id);
+  let m = data.find(x => x.id == id);
+  if (!m) return;
 
-  if (!movie) return;
+ 
+  document.getElementById("hero").style.background =
+    `url(${m.backdrop}) center/cover`;
 
-  const storageKey = "reviews_" + id;
+  document.getElementById("t").textContent = m.title;
 
+  document.getElementById("i").textContent =
+    `⭐ ${m.rating} • ${m.year} • ${m.genre.join(", ")}`;
 
-  let savedReviews = JSON.parse(localStorage.getItem(storageKey)) || [];
-  movie.reviews = [...(movie.reviews || []), ...savedReviews];
+  document.getElementById("d").textContent =
+    m.ldescription || m.description;
+  document.getElementById("trailer").src = m.trailer;
 
+  const key = "reviews_" + id;
+  let saved = JSON.parse(localStorage.getItem(key)) || [];
 
-  document.querySelector(".movie-hero").style.background =
-    `url(${movie.backdrop}) center/cover`;
+  m.reviews = [...(m.reviews || []), ...saved];
 
-  document.getElementById("title").textContent = movie.title;
+  const box = document.getElementById("reviews");
+  const temp = document.getElementById("rev-temp");
 
-  document.getElementById("info").textContent =
-    `⭐ ${movie.rating} • ${movie.year} • ${movie.genre.join(", ")}`;
+  function showReviews() {
+    box.innerHTML = "";
 
- document.getElementById("description").textContent =
-  movie.ldescription || movie.description;
-
- document.getElementById("trailer").src = movie.trailer;
-
-
-  const reviewsDiv = document.getElementById("reviews");
-
-  function renderReviews() {
-    reviewsDiv.innerHTML = "";
-
-    movie.reviews.forEach(r => {
-      reviewsDiv.innerHTML += `
-        <p>⭐ ${r.rating} - ${r.comment}</p>
-      `;
+    m.reviews.forEach(r => {
+      const c = temp.content.cloneNode(true);
+      c.querySelector("p").textContent =
+        `⭐ ${r.rating} - ${r.comment}`;
+      box.appendChild(c);
     });
   }
 
-  renderReviews();
+  showReviews();
 
-  
-  let selectedRating = 0;
-  const starsContainer = document.getElementById("ratingStars");
 
-  starsContainer.innerHTML = "";
+  let rate = 0;
+  const stars = document.getElementById("stars");
 
   for (let i = 1; i <= 5; i++) {
-    const star = document.createElement("span");
-    star.textContent = "★";
+    const s = document.createElement("span");
+    s.textContent = "★";
 
-    star.onclick = () => {
-      selectedRating = i;
-      document.querySelectorAll("#ratingStars span").forEach((s, idx) => {
-        s.classList.toggle("active", idx < i);
-      });
+    s.onclick = () => {
+      rate = i;
+      document.querySelectorAll("#stars span")
+        .forEach((el, idx) => el.classList.toggle("active", idx < i));
     };
 
-    starsContainer.appendChild(star);
+    stars.appendChild(s);
   }
 
-  
-  document.getElementById("submitReview").onclick = () => {
-    const text = document.getElementById("reviewInput").value;
 
-    if (!text || selectedRating === 0) {
+  document.getElementById("btn").onclick = () => {
+
+    const text = document.getElementById("inp").value;
+
+    if (!text || rate === 0) {
       alert("Give rating & review");
       return;
     }
 
-    const newReview = {
-      rating: selectedRating,
-      comment: text
-    };
+    const obj = { rating: rate, comment: text };
 
-    movie.reviews.push(newReview);
+    m.reviews.push(obj);
+    saved.push(obj);
 
-    
-    savedReviews.push(newReview);
-    localStorage.setItem(storageKey, JSON.stringify(savedReviews));
+    localStorage.setItem(key, JSON.stringify(saved));
 
-    renderReviews();
+    showReviews();
 
-    document.getElementById("reviewInput").value = "";
+    document.getElementById("inp").value = "";
   };
+  const rel = document.getElementById("rel");
+  const relTemp = document.getElementById("rel-temp");
 
-  
-  const relatedDiv = document.getElementById("relatedMovies");
-
-  const related = movies
-    .filter(m => m.genre.some(g => movie.genre.includes(g)) && m.id != movie.id)
+  const list = data
+    .filter(x => x.genre.some(g => m.genre.includes(g)) && x.id != m.id)
     .slice(0, 10);
 
-  related.forEach(r => {
-    relatedDiv.innerHTML += `
-      <img src="${r.poster}" onclick="location.href='movie.html?id=${r.id}'">
-    `;
+  list.forEach(r => {
+    const c = relTemp.content.cloneNode(true);
+
+    const img = c.querySelector("img");
+    img.src = r.poster;
+
+    img.onclick = () => {
+      location.href = `movie.html?id=${r.id}`;
+    };
+
+    rel.appendChild(c);
   });
 
 });

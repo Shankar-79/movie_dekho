@@ -1,84 +1,82 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
   const res = await fetch("../movie.json");
-  const allData = await res.json();
+  const data = await res.json();
 
-  
-  const shows = allData.filter(m => m.type === "series");
+  const shows = data.filter(m => m.type === "series");
 
-  const top10Row = document.getElementById("top10Row");
-  const trendingRow = document.getElementById("trendingRow");
-  const latestRow = document.getElementById("latestRow");
-  const topRatedRow = document.getElementById("topRatedRow");
-  const categoriesContainer = document.getElementById("categoriesContainer");
+  const top = document.getElementById("top");
+  const trend = document.getElementById("trend");
+  const latest = document.getElementById("latest");
+  const rated = document.getElementById("rated");
+  const cat = document.getElementById("cat");
 
+  const cardTemp = document.getElementById("card");
+  const catTemp = document.getElementById("category");
 
-  function createCard(show) {
-    return `
-      <div class="movie-card"
-      onclick="window.location.href='../pages/movie.html?id=${show.id}'">
-        <img src="${show.poster}" alt="${show.title}">
-        <div class="movie-info">
-          <h4>${show.title}</h4>
-          <p>⭐ ${show.rating}</p>
-          <p>${show.genre.join(", ")}</p>
-          <span class="review">
-            "${show.reviews?.[0]?.comment || "Great show"}"
-          </span>
-        </div>
-      </div>
-    `;
+  function card(show) {
+    const c = cardTemp.content.cloneNode(true);
+
+    const box = c.querySelector(".movie-card");
+
+    c.querySelector(".poster").src = show.poster;
+    c.querySelector(".title").textContent = show.title;
+    c.querySelector(".rating").textContent = `⭐ ${show.rating}`;
+    c.querySelector(".genre").textContent = show.genre.join(", ");
+    c.querySelector(".review").textContent =
+      `"${show.reviews?.[0]?.comment || "Great show"}"`;
+
+    box.onclick = () => {
+      window.location.href = `../pages/movie.html?id=${show.id}`;
+    };
+
+    return c;
   }
 
+  function render(el, list) {
+    el.innerHTML = "";
+    list.forEach(s => el.appendChild(card(s)));
+  }
 
-  const top10 = [...shows]
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 10);
+  render(top,
+    [...shows].sort((a, b) => b.rating - a.rating).slice(0, 10)
+  );
 
-  top10Row.innerHTML = top10.map(createCard).join("");
+  render(trend,
+    [...shows].sort(() => 0.5 - Math.random()).slice(0, 10)
+  );
 
-  
-  const trending = [...shows]
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 10);
+  render(latest,
+    [...shows].sort((a, b) => b.year - a.year).slice(0, 10)
+  );
 
-  trendingRow.innerHTML = trending.map(createCard).join("");
-
-
-  const latest = [...shows]
-    .sort((a, b) => b.year - a.year)
-    .slice(0, 10);
-
-  latestRow.innerHTML = latest.map(createCard).join("");
-
- 
-  const topRated = [...shows]
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 10);
-
-  topRatedRow.innerHTML = topRated.map(createCard).join("");
+  render(rated,
+    [...shows].sort((a, b) => b.rating - a.rating).slice(0, 10)
+  );
 
 
-  const genreMap = {};
+  const map = {};
 
-  shows.forEach(show => {
-    show.genre.forEach(g => {
-      if (!genreMap[g]) genreMap[g] = [];
-      genreMap[g].push(show);
+  shows.forEach(s => {
+    s.genre.forEach(g => {
+      if (!map[g]) map[g] = [];
+      map[g].push(s);
     });
   });
 
-  Object.keys(genreMap).forEach(genre => {
-    const list = genreMap[genre].slice(0, 10);
+  Object.keys(map).forEach(g => {
 
-    categoriesContainer.innerHTML += `
-      <div class="category-block">
-        <h2 class="section-title">${genre}</h2>
-        <div class="category-row">
-          ${list.map(createCard).join("")}
-        </div>
-      </div>
-    `;
+    const c = catTemp.content.cloneNode(true);
+
+    c.querySelector(".cat-title").textContent = g;
+
+    const row = c.querySelector(".cat-row");
+
+    map[g].slice(0, 10).forEach(s => {
+      row.appendChild(card(s));
+    });
+
+    cat.appendChild(c);
   });
 
 });

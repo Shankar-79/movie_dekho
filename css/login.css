@@ -35,8 +35,6 @@ box-shadow:0 20px 60px rgba(0,0,0,.4);
 text-align:center;
 }
 
-
-
 .login-card h2{
 margin-bottom:5px;
 }
@@ -70,8 +68,6 @@ transition:.3s;
 border-color:black;
 }
 
-
-
 .options{
 display:flex;
 justify-content:space-between;
@@ -83,8 +79,6 @@ margin-bottom:20px;
 text-decoration:none;
 color:black;
 }
-
-
 
 .login-btn{
 width:100%;
@@ -101,8 +95,6 @@ transition:.3s;
 .login-btn:hover{
 opacity:.85;
 }
-
-
 
 .signup{
 margin-top:20px;

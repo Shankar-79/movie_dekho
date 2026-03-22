@@ -7,24 +7,19 @@
 
 <link rel="stylesheet" href="../css/navbar.css">
 <link rel="stylesheet" href="../css/home.css">
-<link rel="shortcut icon" href="../assets/img/favicon.png" types="image/x-icon">
-
-
+<link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
 
 </head>
 <body>
 
- <div id="navbar-container"></div>
+<div id="navbar-container"></div>
+
 
 <section class="hero-section">
-   
   <div class="hero-card" id="heroCard">
-    
     <div class="hero-content">
       <h1 id="heroTitle"></h1>
-
       <p id="heroInfo"></p>
-
       <p id="heroDesc"></p>
 
       <div class="hero-buttons">
@@ -32,42 +27,69 @@
         <button class="review-btn">Read Reviews</button>
       </div>
     </div>
-
   </div>
 </section>
-
 
 <section class="celebs">
 
-<h2 class="section-title">Most Popular Celebrities</h2>
+  <h2 class="section-title">Most Popular Celebrities</h2>
 
-<div class="celebs-row">
+  <div class="celebs-row"></div>
 
-</div>
+  
+  <template id="celeb-template">
+    <div class="celeb-card">
+      <img class="celeb-img">
+      <div class="plus">+</div>
+      <p class="rank"></p>
+      <h4 class="celeb-name"></h4>
+    </div>
+  </template>
 
 </section>
 
-<<section class="theatre">
+
+<section class="theatre">
 
   <h2 class="section-title">Opening This Week</h2>
 
-  <div class="opening" id="openingRow">
-  </div>
+  <div class="opening" id="openingRow"></div>
+
+  <template id="upcoming-template">
+    <div class="upcoming-card">
+      <img class="upcoming-poster">
+      <div class="upcoming-info">
+        <p class="upcoming-rating"></p>
+        <h4 class="upcoming-title"></h4>
+      </div>
+    </div>
+  </template>
 
   <h2 class="section-title">Top 10 Movies</h2>
 
-  <div class="movies" id="moviesGrid">
- 
-  </div>
+  <div class="movies" id="moviesGrid"></div>
+
+  <template id="top-movie-template">
+    <div class="top-card">
+      <span class="rank-badge"></span>
+      <img class="top-poster">
+      <div class="top-info">
+        <h4 class="top-title"></h4>
+        <p class="top-meta"></p>
+        <p class="top-rating"></p>
+        <p class="top-desc"></p>
+      </div>
+    </div>
+  </template>
 
 </section>
 
 <footer class="footer">
 © 2026 MoviesDekho
 </footer>
-
-
+<script src="../js/watchlist.js"></script>
 <script src="../js/home.js"></script>
 <script src="../js/loadcomponent.js"></script>
+
 </body>
 </html>

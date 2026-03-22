@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile</title>
+
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/mylist.css">
+  <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+
+  <div id="navbar-container"></div>
+
+
+  <section id="loginBox" style="display:none; text-align:center; padding:60px;">
+    <h2>Please login to view your profile</h2>
+    <button onclick="location.href='../pages/login.html'" class="login-btn">Login</button>
+  </section>
+
+
+  <section id="profileSection">
+    <h2 class="section-title">My Profile</h2>
+
+    <div class="profile-box">
+      <div>
+        <p id="name"></p>
+        <p id="email"></p>
+        <p id="count"></p>
+      </div>
+
+      <button id="logout">Logout</button>
+    </div>
+  </section>
+
+
+  <section id="watchSection">
+    <h2 class="section-title">My Watchlist</h2>
+
+    <div class="row" id="list"></div>
+  </section>
+
+  <template id="card">
+    <div class="movie-card">
+      <img class="poster">
+      <div class="movie-info">
+        <h4 class="title"></h4>
+        <p class="rating"></p>
+        <p class="genre"></p>
+      </div>
+    </div>
+  </template>
+
+  
+  <template id="empty">
+    <p style="padding:20px; opacity:0.6;">
+      No movies in your watchlist ⭐
+    </p>
+  </template>
+  <script src="../js/watchlist.js"></script>
+  <script src="../js/loadcomponent.js"></script>
+  <script src="../js/mylist.js"></script>
+
+</body>
+</html>

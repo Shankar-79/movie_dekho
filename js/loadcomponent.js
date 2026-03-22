@@ -19,3 +19,20 @@ window.location.href="../pages/login.html";
 })
 
 });
+document.addEventListener("DOMContentLoaded", () => {
+
+  const input = document.getElementById("search");
+
+  if (!input) return;
+
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      const q = input.value.trim();
+
+      if (q) {
+        window.location.href = `../pages/movies.html?q=${q}`;
+      }
+    }
+  });
+
+});
