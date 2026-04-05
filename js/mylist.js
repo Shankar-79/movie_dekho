@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
- 
   if (localStorage.getItem("loggedIn") !== "true") {
     window.location.href = "../pages/login.html";
     return;
@@ -15,19 +14,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   const res = await fetch("../data/movie.json");
   const data = await res.json();
 
-
-  const ids = JSON.parse(localStorage.getItem("watchlist")) || [];
+  // 🔥 FIX 1: always ensure numbers
+  const ids = (JSON.parse(localStorage.getItem("watchlist")) || []).map(Number);
 
   document.getElementById("count").textContent =
     "Watchlist: " + ids.length;
 
-  const list = data.filter(m => ids.includes(m.id));
+  // 🔥 FIX 2: match properly
+  const list = data.filter(m => ids.includes(Number(m.id)));
 
   const box = document.getElementById("list");
   const temp = document.getElementById("card");
   const empty = document.getElementById("empty");
 
- 
+  box.innerHTML = ""; // 🔥 clear first
+
   if (list.length === 0) {
     box.appendChild(empty.content.cloneNode(true));
   } else {
@@ -47,7 +48,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
- 
   document.getElementById("logout").onclick = () => {
     localStorage.removeItem("loggedIn");
     localStorage.removeItem("user_name");

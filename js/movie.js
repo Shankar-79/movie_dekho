@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let m = data.find(x => x.id == id);
   if (!m) return;
-
  
   document.getElementById("hero").style.background =
     `url(${m.backdrop}) center/cover`;
@@ -28,6 +27,41 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const box = document.getElementById("reviews");
   const temp = document.getElementById("rev-temp");
+  const watchBtn = document.getElementById("watchBtn");
+
+  function getWatchlist() {
+    return JSON.parse(localStorage.getItem("watchlist")) || [];
+  }
+
+  function saveWatchlist(list) {
+    localStorage.setItem("watchlist", JSON.stringify(list));
+  }
+
+  function updateWatchBtn() {
+    const list = getWatchlist();
+    if (list.includes(m.id)) {
+      watchBtn.textContent = "❤️ Added";
+    } else {
+      watchBtn.textContent = "🤍 Add to Watchlist";
+    }
+  }
+
+  watchBtn.onclick = () => {
+    let list = getWatchlist();
+
+    if (list.includes(m.id)) {
+      list = list.filter(x => x !== m.id);
+    } else {
+      list.push(m.id);
+    }
+
+    saveWatchlist(list);
+    updateWatchBtn();
+
+    
+  };
+
+  updateWatchBtn();
 
   function showReviews() {
     box.innerHTML = "";

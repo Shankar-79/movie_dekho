@@ -18,21 +18,22 @@ window.location.href="../pages/login.html";
 }
 })
 
-});
-document.addEventListener("DOMContentLoaded", () => {
-
-  const input = document.getElementById("search");
+  const input = document.querySelector('input[placeholder="Search..."]');
 
   if (!input) return;
 
-  input.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      const q = input.value.trim();
+  function goSearch() {
+    const q = input.value.trim();
 
-      if (q) {
-        window.location.href = `../pages/movies.html?q=${q}`;
-      }
+    if (q) {
+      window.location.href = `../pages/movies.html?q=${q}`;
+    }
+  }
+
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      goSearch();
     }
   });
-
 });
