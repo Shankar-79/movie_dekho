@@ -1,13 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
+$(document).ready(function () {
 
-  async function loadMovies() {
-    try {
-      const res = await fetch("../data/movie.json");
-      const movies = await res.json();
-      renderMovies(movies);
-    } catch (err) {
-      console.error("Error loading movie data:", err);
-    }
+  function loadMovies() {
+    $.ajax({
+      url: "../data/movie.json",
+      method: "GET",
+      success: function (movies) {
+        renderMovies(movies);
+      },
+      error: function (err) {
+        console.error("Error loading movie data:", err);
+      }
+    });
   }
 
   function renderMovies(movies) {
@@ -23,16 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const upcoming = movies.filter(m => m.year === 2026).slice(0, 10);
     const top10 = [...movies].sort((a, b) => b.rating - a.rating).slice(0, 10);
 
-    const heroMix = [...trending,  ...upcoming]
+    const heroMix = [...trending, ...upcoming]
       .sort(() => 0.5 - Math.random())
       .slice(0, 10);
+
     const heroCard = document.getElementById("heroCard");
     const heroTitle = document.getElementById("heroTitle");
     const heroInfo = document.getElementById("heroInfo");
     const heroDesc = document.getElementById("heroDesc");
     const heroSection = document.querySelector(".hero-section");
     const detailsBtn = document.querySelector(".details-btn");
-const reviewBtn = document.querySelector(".review-btn");
+    const reviewBtn = document.querySelector(".review-btn");
 
     let index = 0;
 
@@ -55,13 +59,14 @@ const reviewBtn = document.querySelector(".review-btn");
 
         heroSection.style.background =
           `linear-gradient(to bottom, ${c1}, ${c2}, #000)`;
-            detailsBtn.onclick = () => {
-      window.location.href = `../pages/movie.html?id=${movie.id}`;
-    };
 
-    reviewBtn.onclick = () => {
-      window.location.href = `../pages/movie.html?id=${movie.id}#reviews`;
-    };
+        detailsBtn.onclick = () => {
+          window.location.href = `../pages/movie.html?id=${movie.id}`;
+        };
+
+        reviewBtn.onclick = () => {
+          window.location.href = `../pages/movie.html?id=${movie.id}#reviews`;
+        };
 
         heroCard.style.opacity = 1;
 
@@ -120,6 +125,8 @@ const reviewBtn = document.querySelector(".review-btn");
   }
 
   loadMovies();
+
+  
   const actorsData = [
     { name: "Zendaya", followers: 184000000, img: "zendaya.jpeg" },
     { name: "Tom Holland", followers: 67000000, img: "tomholland.jpeg" },
