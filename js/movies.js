@@ -1,29 +1,30 @@
+// movies.js — jQuery added for search filter, scroll navbar, back-to-top
+
 document.addEventListener("DOMContentLoaded", async () => {
 
-  const res = await fetch("../data/movie.json");
+  const res     = await fetch("../data/movie.json");
   const allData = await res.json();
 
   const movies = allData.filter(m => m.type === "movie");
 
-  const top10Row = document.getElementById("top10Row");
-  const trendingRow = document.getElementById("trendingRow");
-  const latestRow = document.getElementById("latestRow");
-  const topRatedRow = document.getElementById("topRatedRow");
+  const top10Row           = document.getElementById("top10Row");
+  const trendingRow        = document.getElementById("trendingRow");
+  const latestRow          = document.getElementById("latestRow");
+  const topRatedRow        = document.getElementById("topRatedRow");
   const categoriesContainer = document.getElementById("categories");
 
-  const cardTemplate = document.getElementById("moviecard");
+  const cardTemplate     = document.getElementById("moviecard");
   const categoryTemplate = document.getElementById("category");
 
   function createCard(movie) {
     const clone = cardTemplate.content.cloneNode(true);
+    const card  = clone.querySelector(".movie-card");
 
-    const card = clone.querySelector(".movie-card");
-
-    clone.querySelector(".movie-poster").src = movie.poster;
-    clone.querySelector(".movie-title").textContent = movie.title;
-    clone.querySelector(".movie-rating").textContent = `⭐ ${movie.rating}`;
-    clone.querySelector(".movie-genre").textContent = movie.genre.join(", ");
-    clone.querySelector(".review").textContent =
+    clone.querySelector(".movie-poster").src            = movie.poster;
+    clone.querySelector(".movie-title").textContent     = movie.title;
+    clone.querySelector(".movie-rating").textContent    = `⭐ ${movie.rating}`;
+    clone.querySelector(".movie-genre").textContent     = movie.genre.join(", ");
+    clone.querySelector(".review").textContent          =
       `"${movie.reviews?.[0]?.comment || "Great movie"}"`;
 
     card.onclick = () => {
@@ -32,41 +33,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     return clone;
   }
+
   function renderList(container, list) {
     container.innerHTML = "";
-    list.forEach(movie => {
-      container.appendChild(createCard(movie));
-    });
+    list.forEach(movie => container.appendChild(createCard(movie)));
   }
 
-
-  const top10 = [...movies]
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 10);
-
+  const top10 = [...movies].sort((a, b) => b.rating - a.rating).slice(0, 10);
   renderList(top10Row, top10);
 
-  const trending = [...movies]
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 10);
-
+  const trending = [...movies].sort(() => 0.5 - Math.random()).slice(0, 10);
   renderList(trendingRow, trending);
 
-  const latest = [...movies]
-    .sort((a, b) => b.year - a.year)
-    .slice(0, 10);
-
+  const latest = [...movies].sort((a, b) => b.year - a.year).slice(0, 10);
   renderList(latestRow, latest);
 
-  const topRated = [...movies]
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 10);
-
+  const topRated = [...movies].sort((a, b) => b.rating - a.rating).slice(0, 10);
   renderList(topRatedRow, topRated);
 
-
   const genreMap = {};
-
   movies.forEach(movie => {
     movie.genre.forEach(g => {
       if (!genreMap[g]) genreMap[g] = [];
@@ -75,19 +60,51 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   Object.keys(genreMap).forEach(genre => {
-
     const clone = categoryTemplate.content.cloneNode(true);
-
     const title = clone.querySelector(".category-title");
-    const row = clone.querySelector(".category-row");
+    const row   = clone.querySelector(".category-row");
 
     title.textContent = genre;
-
-    genreMap[genre].slice(0, 10).forEach(movie => {
-      row.appendChild(createCard(movie));
-    });
-
+    genreMap[genre].slice(0, 10).forEach(movie => row.appendChild(createCard(movie)));
     categoriesContainer.appendChild(clone);
+  });
+
+
+  
+  $("#searchInput").on("input", function () {
+    const q = $(this).val().toLowerCase().trim();
+
+    $(".movie-card").each(function () {
+      const title = $(this).find(".movie-title").text().toLowerCase();
+      const genre = $(this).find(".movie-genre").text().toLowerCase();
+
+      if (title.includes(q) || genre.includes(q)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+
+  $(window).on("scroll", function () {
+    if ($(this).scrollTop() > 60) {
+      $(".navbar").addClass("scrolled");
+    } else {
+      $(".navbar").removeClass("scrolled");
+    }
+
+    if ($(this).scrollTop() > 300) {
+      $("#backToTop").fadeIn(200);
+    } else {
+      $("#backToTop").fadeOut(200);
+    }
+  });
+
+  $("body").append('<button id="backToTop" title="Back to top">&#8679;</button>');
+  $("#backToTop").hide();
+
+  $("#backToTop").on("click", function () {
+    $("html, body").animate({ scrollTop: 0 }, 400);
   });
 
 });

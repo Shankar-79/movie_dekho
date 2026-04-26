@@ -1,39 +1,48 @@
-const form=document.getElementById("signupForm");
+$(document).ready(function () {
 
-form.addEventListener("submit",(e)=>{
-e.preventDefault();
+  const form = $("#signupForm");
 
-const username=form.username.value.trim();
-const email=form.email.value.trim();
-const password=form.password.value.trim();
+ 
+  form.find("input").on("input", function () {
+    const val = $(this).val().trim();
 
+    if (val.length === 0) {
+      $(this).removeClass("field-ok").addClass("field-error");
+    } else {
+      $(this).removeClass("field-error").addClass("field-ok");
+    }
+  });
 
+  form.on("submit", function (e) {
+    e.preventDefault();
 
-if(username==="" || email==="" || password===""){
-alert("Fill all fields");
-return;
-}
+    const username = form.find('[name="username"]').val().trim();
+    const email    = form.find('[name="email"]').val().trim();
+    const password = form.find('[name="password"]').val().trim();
 
-if(password.length<4){
-alert("Password must be at least 4 characters");
-return;
-}
+    if (username === "" || email === "" || password === "") {
+      $("#signupMsg").text("Please fill all fields.").addClass("error-msg");
+      return;
+    }
 
+    if (password.length < 4) {
+      $("#signupMsg").text("Password must be at least 4 characters.").addClass("error-msg");
+      return;
+    }
 
+    const userData = { username, email, password };
+    localStorage.setItem("userAccount", JSON.stringify(userData));
 
+   
+    $("#signupMsg")
+      .text("Signup successful! Redirecting to login...")
+      .removeClass("error-msg")
+      .addClass("success-msg");
 
-const userData={
-username,
-email,
-password
-};
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 800);
 
-localStorage.setItem("userAccount", JSON.stringify(userData));
-
-alert("Signup successful! Please login.");
-
-
-
-window.location.href="login.html";
+  });
 
 });
