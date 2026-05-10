@@ -3,65 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Profile</title>
-
-  <link rel="stylesheet" href="../css/navbar.css">
-  <link rel="stylesheet" href="../css/mylist.css">
+  <title>MoviesDekho - My List</title>
+  <link rel="stylesheet" href="../css/navbar.css?v=10">
+  <link rel="stylesheet" href="../css/mylist.css?v=15">
   <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
 </head>
-
-<body>
-
+<body class="mylist-page">
   <div id="navbar-container"></div>
 
-
-  <section id="loginBox" style="display:none; text-align:center; padding:60px;">
-    <h2>Please login to view your profile</h2>
-    <button onclick="location.href='../pages/login.html'" class="login-btn">Login</button>
-  </section>
-
-
-  <section id="profileSection">
-    <h2 class="section-title">My Profile</h2>
-
-    <div class="profile-box">
+  <main class="profile-shell mylist-shell">
+    <section class="toolbar-panel">
       <div>
-        <p id="name"></p>
-        <p id="email"></p>
-        <p id="count"></p>
+        <span class="eyebrow">Saved Library</span>
+        <h2>My Watchlist</h2>
+        <p id="count">0 saved titles</p>
       </div>
+      <div class="tools">
+        <input type="search" id="listSearch" placeholder="Search inside watchlist">
+        <select id="categoryFilter" aria-label="Filter watchlist type">
+          <option value="all">All Categories</option>
+          <option value="movie">Movies</option>
+          <option value="series">Series</option>
+          <option value="celebrity">Celebrities</option>
+        </select>
+        <select id="sortFilter" aria-label="Sort watchlist">
+          <option value="recent">Recently Added</option>
+          <option value="rating">Rating</option>
+          <option value="year">Release Year</option>
+          <option value="title">Title</option>
+        </select>
+        <button id="gridToggle" type="button">Grid</button>
+      </div>
+    </section>
 
-      <button id="logout">Logout</button>
-    </div>
-  </section>
+    <section class="content-block">
+      <div class="section-head">
+        <span class="eyebrow">Saved queue</span>
+        <h2>Saved Titles</h2>
+      </div>
+      <div class="row grid-mode" id="list"></div>
+      <div class="empty-state" id="emptyState">
+        <h3>Your list is waiting for its first title</h3>
+        <p>Save movies and shows from any card to build a personal discovery list.</p>
+        <a href="../pages/movies.html">Explore Movies</a>
+      </div>
+    </section>
 
+    <section class="celebrity-list-panel" id="favorites">
+      <div class="section-head">
+        <span class="eyebrow">Celebrity activity</span>
+        <h2>Followed & Favorite Celebrities</h2>
+      </div>
+      <div class="celebrity-summary" id="celebritySummary"></div>
+      <div class="celebrity-list-grid" id="celebrityList"></div>
+    </section>
 
-  <section id="watchSection">
-    <h2 class="section-title">My Watchlist</h2>
+    <section class="review-panel">
+      <div class="section-head">
+        <span class="eyebrow">Your activity</span>
+        <h2>Reviews You Added</h2>
+      </div>
+      <div class="review-history" id="reviewHistory"></div>
+    </section>
 
-    <div class="row" id="list"></div>
-  </section>
+    <!-- TODO: Mail alerts feature disabled until SMTP is configured.
+         Current state: stores preferences in localStorage only, emails not sent.
+         Requires: PHPMailer or SMTP configuration + database persistence.
+         To re-enable: set up SMTP config and uncomment the form below.
+    <section class="notification-panel">
+      <div>
+        <span class="eyebrow">Mail notifications</span>
+        <h2>Followed Celebrity Updates</h2>
+        <p>Get a mail-ready digest for followed celebrity comments, favorites, and profile updates.</p>
+      </div>
+      <form id="notificationForm">
+        <input type="email" id="notificationEmail" placeholder="Email address" aria-label="Email address">
+        <button type="submit">Save Mail Alerts</button>
+      </form>
+      <div class="notification-feed" id="notificationFeed"></div>
+    </section>
+    -->
+  </main>
 
   <template id="card">
-    <div class="movie-card">
-      <img class="poster">
+    <article class="movie-card" draggable="true">
+      <span class="priority"></span>
+      <button class="remove-btn" type="button" aria-label="Remove title">&times;</button>
+      <img class="poster" alt="">
       <div class="movie-info">
         <h4 class="title"></h4>
         <p class="rating"></p>
         <p class="genre"></p>
+        <div class="progress-track"><span></span></div>
+        <div class="card-actions">
+          <button type="button">View Details</button>
+          <button type="button">Reviews</button>
+        </div>
       </div>
-    </div>
+    </article>
   </template>
 
-  
-  <template id="empty">
-    <p style="padding:20px; opacity:0.6;">
-      No movies in your watchlist ⭐
-    </p>
+  <template id="celebrityCard">
+    <article class="saved-celebrity-card">
+      <img class="celeb-avatar" alt="">
+      <div>
+        <span class="celeb-state"></span>
+        <h3 class="celeb-name"></h3>
+        <p class="celeb-meta"></p>
+        <div class="celeb-actions">
+          <button type="button" class="view-celeb">View</button>
+          <button type="button" class="remove-celeb">Remove</button>
+        </div>
+      </div>
+    </article>
   </template>
-  <script src="../js/watchlist.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="../js/watchlist.js?v=3"></script>
   <script src="../js/loadcomponent.js"></script>
-  <script src="../js/mylist.js"></script>
-
+  <script src="../js/mylist.js?v=12"></script>
 </body>
 </html>

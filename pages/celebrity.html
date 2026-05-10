@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoviesDekho - Celebrity</title>
+  <link rel="stylesheet" href="../css/navbar.css?v=10">
+  <link rel="stylesheet" href="../css/celebrities.css?v=7">
+  <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
+</head>
+<body class="celebrity-detail-page">
+  <div id="navbar-container"></div>
+
+  <main id="celebrityDetail">
+    <section class="detail-hero" id="detailHero">
+      <div class="detail-overlay"></div>
+      <div class="detail-hero-inner">
+        <img id="profileImage" class="detail-profile-image" alt="">
+        <div class="detail-copy">
+          <span class="trending-badge" id="trendingBadge">Trending</span>
+          <h1><span id="fullName"></span><span class="verify-mark">&#10003;</span></h1>
+          <p id="shortBio"></p>
+          <div class="profession-tags" id="professionTags"></div>
+          <div class="detail-actions">
+            <button id="followBtn" type="button">Follow</button>
+            <button id="favoriteBtn" type="button">Favorite</button>
+            <button id="shareBtn" type="button">Share</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="celebrity-stats" id="statsGrid"></section>
+
+    <section class="detail-grid">
+      <article class="detail-panel wide">
+        <span class="eyebrow">Biography</span>
+        <h2>Career Story</h2>
+        <p id="biography"></p>
+        <div class="timeline" id="timeline"></div>
+      </article>
+      <aside class="detail-panel">
+        <span class="eyebrow">Profile</span>
+        <h2>Quick Facts</h2>
+        <div class="fact-list" id="facts"></div>
+      </aside>
+    </section>
+
+    <section class="detail-panel" id="knownForSection">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Filmography</span>
+          <h2>Known For</h2>
+        </div>
+      </div>
+      <div class="film-row" id="filmography"></div>
+    </section>
+
+    <section class="detail-panel">
+      <span class="eyebrow">Gallery</span>
+      <h2>Photo Gallery</h2>
+      <div class="gallery-masonry" id="gallery"></div>
+    </section>
+
+    <section class="detail-grid">
+      <article class="detail-panel">
+        <span class="eyebrow">Social</span>
+        <h2>Official Links</h2>
+        <div class="social-grid" id="socialLinks"></div>
+      </article>
+      <article class="detail-panel">
+        <span class="eyebrow">Fans</span>
+        <h2>Fan Comments</h2>
+        <div id="comments"></div>
+        <div class="comment-form">
+          <select id="commentRating" aria-label="Fan rating">
+            <option value="5">5 stars</option>
+            <option value="4">4 stars</option>
+            <option value="3">3 stars</option>
+          </select>
+          <textarea id="commentInput" placeholder="Write a fan comment"></textarea>
+          <button id="commentBtn" type="button">Post Comment</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="detail-panel">
+      <span class="eyebrow">Recommended</span>
+      <h2>Related Celebrities</h2>
+      <div class="celebrity-row" id="relatedRow"></div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox"><button id="closeLightbox" type="button">&times;</button><img alt=""></div>
+  <div class="toast" id="toast"></div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="../js/loadcomponent.js"></script>
+  <script src="../js/celebrity.js?v=8"></script>
+</body>
+</html>
