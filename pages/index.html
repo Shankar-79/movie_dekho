@@ -5,15 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MoviesDekho</title>
 
-<link rel="stylesheet" href="../css/navbar.css">
-<link rel="stylesheet" href="../css/home.css">
+<link rel="stylesheet" href="../css/navbar.css?v=10">
+<link rel="stylesheet" href="../css/home.css?v=14">
 <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
-
 </head>
 <body>
 
 <div id="navbar-container"></div>
-
 
 <section class="hero-section">
   <div class="hero-card" id="heroCard">
@@ -30,67 +28,246 @@
   </div>
 </section>
 
-<section class="celebs">
 
-  <h2 class="section-title">Most Popular Celebrities</h2>
 
-  <div class="celebs-row"></div>
+  <section class="quick-links reveal">
+    <a href="../pages/movies.html">Movies</a>
+    <a href="../pages/shows.html">Shows</a>
+    <a href="../pages/movies.html?sort=rating"> Top Picks</a>
+    <a href="../pages/mylist.html">My List</a>
+  </section>
 
-  
-  <template id="celeb-template">
-    <div class="celeb-card">
-      <img class="celeb-img">
-      <div class="plus">+</div>
-      <p class="rank"></p>
-      <h4 class="celeb-name"></h4>
+  <section class="stats-strip reveal" id="statsStrip"></section>
+
+  <section class="cinematic-banner reveal" id="moodBanner">
+    <div>
+      <span class="eyebrow">AI-style picks</span>
+      <h2>Match tonight's mood in one scroll</h2>
+      <p>Smart rows blend rating, genre, recency, and your saved list into a discovery dashboard.</p>
     </div>
-  </template>
+    <div class="mood-actions">
+      <button data-mood="Thriller">Thriller</button>
+      <button data-mood="Comedy">Comedy</button>
+      <button data-mood="Anime">Anime</button>
+      <button data-mood="Family">Family</button>
+    </div>
+  </section>
 
-</section>
+  <section class="content-row reveal" id="trending" data-source="trending">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Hot right now</span>
+        <h2 class="section-title">Trending Now</h2>
+      </div>
+      <a href="../pages/movies.html">View all</a>
+    </div>
+    <div class="movie-row auto-row" id="trendingRow"></div>
+  </section>
 
-
-<section class="theatre">
-
-  <h2 class="section-title">Opening This Week</h2>
-
-  <div class="opening" id="openingRow"></div>
-
-  <template id="upcoming-template">
-    <div class="upcoming-card">
-      <img class="upcoming-poster">
-      <div class="upcoming-info">
-        <p class="upcoming-rating"></p>
-        <h4 class="upcoming-title"></h4>
+  <section class="content-row reveal" id="popular" data-source="popular">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Crowd favorites</span>
+        <h2 class="section-title">Popular Movies</h2>
       </div>
     </div>
-  </template>
+    <div class="movie-row" id="popularRow"></div>
+  </section>
 
-  <h2 class="section-title">Top 10 Movies</h2>
+  <section class="split-showcase reveal">
+    <div class="glass-panel">
+      <span class="eyebrow">Critic Notebook</span>
+      <h2>Recently reviewed by the community</h2>
+      <div class="continue-list discovery-list" id="continueList"></div>
+    </div>
+    <div class="glass-panel countdown-panel">
+      <span class="eyebrow">Upcoming</span>
+      <h2>Release countdown</h2>
+      <div id="countdownBox"></div>
+    </div>
+  </section>
 
-  <div class="movies" id="moviesGrid"></div>
-
-  <template id="top-movie-template">
-    <div class="top-card">
-      <span class="rank-badge"></span>
-      <img class="top-poster">
-      <div class="top-info">
-        <h4 class="top-title"></h4>
-        <p class="top-meta"></p>
-        <p class="top-rating"></p>
-        <p class="top-desc"></p>
+  <section class="content-row reveal" id="toprated">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Critic approved</span>
+        <h2 class="section-title">Top Rated</h2>
       </div>
     </div>
-  </template>
+    <div class="movie-row" id="topRatedRow"></div>
+  </section>
 
-</section>
+  <section class="content-row reveal">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Fresh drops</span>
+        <h2 class="section-title">Latest Releases</h2>
+      </div>
+    </div>
+    <div class="movie-row" id="latestRow"></div>
+  </section>
+
+  <section class="content-row reveal">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Personalized row</span>
+        <h2 class="section-title">Recommended For You</h2>
+      </div>
+    </div>
+    <div class="movie-row" id="recommendedRow"></div>
+  </section>
+
+  <section class="collection-grid reveal">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Collections</span>
+        <h2 class="section-title">Featured Collections</h2>
+      </div>
+    </div>
+    <div class="collections" id="collectionsGrid"></div>
+  </section>
+
+  <section class="content-row reveal">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">This week</span>
+        <h2 class="section-title">Trending This Week</h2>
+      </div>
+    </div>
+    <div class="movie-row auto-row reverse" id="weekRow"></div>
+  </section>
+
+  <section class="content-row reveal">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Watch heat</span>
+        <h2 class="section-title">Most Watched</h2>
+      </div>
+    </div>
+    <div class="movie-row" id="watchedRow"></div>
+  </section>
+
+  <section class="content-row reveal">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Curated</span>
+        <h2 class="section-title">Editors Choice</h2>
+      </div>
+    </div>
+    <div class="movie-row" id="editorsRow"></div>
+  </section>
+
+  <section class="genre-zone reveal" id="genres">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Browse</span>
+        <h2 class="section-title">Genre Grid</h2>
+      </div>
+    </div>
+    <div class="genre-grid" id="genreGrid"></div>
+  </section>
+
+  <section class="spotlight-grid reveal">
+    <div class="actor-spotlight glass-panel">
+      <span class="eyebrow">Actor Spotlight</span>
+      <h2>Most Popular Celebrities</h2>
+      <div class="celebs-row"></div>
+    </div>
+    <div class="platforms glass-panel">
+      <span class="eyebrow">Streaming Platforms</span>
+      <h2>Where the crowd is watching</h2>
+      <div id="platformGrid"></div>
+    </div>
+  </section>
+
+  <section class="content-row reveal">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Awards shelf</span>
+        <h2 class="section-title">Award Winning Movies</h2>
+      </div>
+    </div>
+    <div class="movie-row" id="awardsRow"></div>
+  </section>
+
+  <section class="content-row reveal">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Top 10 today</span>
+        <h2 class="section-title">IMDb Top Picks</h2>
+      </div>
+    </div>
+    <div class="top-ten-grid" id="imdbRow"></div>
+  </section>
+
+  <!-- TODO: Newsletter feature disabled until SMTP is configured.
+       Uncomment when email backend is ready.
+       Original form saved below for reference:
+       <section class="newsletter reveal" id="newsletter">
+         <div>
+           <span class="eyebrow">Stay in the loop</span>
+           <h2>Weekly watch drops, no noise</h2>
+           <p>Get new releases, editor picks, and personalized watch-night ideas.</p>
+         </div>
+         <form id="newsletterForm">
+           <input type="email" placeholder="Email address" aria-label="Email address">
+           <button type="submit">Notify Me</button>
+         </form>
+       </section>
+  -->
+<template id="movie-card-template">
+  <article class="stream-card">
+    <button class="save-btn" type="button" title="Save">＋</button>
+    <span class="quality-badge"></span>
+    <div class="poster-wrap">
+      <img class="poster" loading="lazy" alt="">
+      <div class="trailer-preview">Trailer preview</div>
+    </div>
+    <div class="card-body">
+      <h3 class="title"></h3>
+      <p class="meta"></p>
+      <div class="card-actions">
+        <button class="play-btn" type="button">View</button>
+        <button class="like-btn" type="button">Like</button>
+      </div>
+    </div>
+  </article>
+</template>
+
+<template id="genre-template">
+  <button class="genre-tile" type="button">
+    <span class="genre-name"></span>
+    <small class="genre-count"></small>
+  </button>
+</template>
+
+<template id="celeb-template">
+  <div class="celeb-card">
+    <img class="celeb-img" loading="lazy" alt="">
+    <span class="rank"></span>
+    <h4 class="celeb-name"></h4>
+  </div>
+</template>
 
 <footer class="footer">
-© 2026 MoviesDekho
+  <div>
+    <strong>MoviesDekho</strong>
+    <p>Movies, shows, watchlists, and discovery with a cinematic pulse.</p>
+  </div>
+  <div class="footer-links">
+    <a href="../pages/movies.html">Movies</a>
+    <a href="../pages/shows.html">Shows</a>
+    <a href="../pages/mylist.html">My List</a>
+    <a href="../pages/profile.html">Profile</a>
+  </div>
 </footer>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="../js/watchlist.js"></script>
-<script src="../js/home.js"></script>
-<script src="../js/loadcomponent.js"></script>
 
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="toast" id="toast"></div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="../js/watchlist.js?v=3"></script>
+<script src="../js/loadcomponent.js"></script>
+<script src="../js/home.js?v=14"></script>
 </body>
 </html>

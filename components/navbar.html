@@ -1,20 +1,64 @@
-<nav class="navbar">
+<nav class="navbar" data-nav>
   <div class="nav-left">
-    <img src="../assets/img/logo.png" class="logo" />
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a class="brand-link" href="../pages/index.html" aria-label="MoviesDekho home">
+      <img src="../assets/img/logo.png" class="logo" alt="MoviesDekho" />
+    </a>
   </div>
 
- 
-  <ul class="nav-center">
-    <li><a href="../pages/index.html" class="active">Home</a></li>
-    <li><a href="../pages/shows.html">Shows</a></li>
-    <li><a href="../pages/movies.html">Movies</a></li>
+  <ul class="nav-center" id="navMenu">
+    <li><a href="../pages/index.html">Home</a></li>
+    <li class="mega-trigger">
+      <a href="../pages/movies.html">Movies</a>
+      <div class="mega-menu">
+        <a href="../pages/movies.html">Popular Movies</a>
+        <a href="../pages/movies.html?sort=rating">IMDb Top Picks</a>
+        <a href="../pages/movies.html?genre=Action">Action</a>
+        <a href="../pages/movies.html?genre=Horror">Horror</a>
+      </div>
+    </li>
+    <li class="mega-trigger">
+      <a href="../pages/shows.html">Shows</a>
+      <div class="mega-menu">
+        <a href="../pages/shows.html">Trending Shows</a>
+        <a href="../pages/shows.html?genre=Drama">Drama</a>
+        <a href="../pages/shows.html?genre=Anime">Anime</a>
+        <a href="../pages/shows.html?genre=Crime">Crime</a>
+      </div>
+    </li>
     <li><a href="../pages/mylist.html">My List</a></li>
+    <li><a href="../pages/celebrities.html">Celebrities</a></li>
   </ul>
 
- 
   <div class="nav-right">
-    <input type="text" placeholder="Search..." />
-    <img src="../assets/img/user.png" class="profile" id="profile" />
-  </div>
+    <div class="nav-search">
+      <button class="search-toggle" id="searchToggle" type="button" aria-label="Search">Search</button>
+      <input type="search" id="navSearch" placeholder="Search movies, shows, actors">
+      <div class="live-results" id="liveResults"></div>
+    </div>
 
+    <a class="nav-icon" href="../pages/mylist.html" title="Watchlist" aria-label="Watchlist">+</a>
+    <button class="profile-button" id="profileMenuButton" type="button" aria-label="Open profile menu">
+      <img src="../assets/img/user.png" class="profile" id="profile" alt="Profile" />
+    </button>
+
+    <div class="profile-dropdown" id="profileDropdown">
+      <div class="profile-card-head">
+        <img src="../assets/img/user.png" alt="User avatar">
+        <div>
+          <small>Welcome back</small>
+          <strong id="navUserName">Movie Fan</strong>
+        </div>
+      </div>
+      <a href="../pages/profile.html">My Profile</a>
+      <a href="../pages/mylist.html">Watchlist</a>
+      <a href="../pages/mylist.html#favorites">Favorites</a>
+      <a href="../pages/profile.html#settings">Settings</a>
+      <button id="navLogout" type="button">Logout</button>
+    </div>
+  </div>
 </nav>

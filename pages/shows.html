@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MoviesDekho - Shows</title>
 
-  <link rel="stylesheet" href="../css/navbar.css">
-  <link rel="stylesheet" href="../css/movies.css">
+  <link rel="stylesheet" href="../css/navbar.css?v=10">
+  <link rel="stylesheet" href="../css/movies.css?v=9">
   <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
 </head>
 
@@ -14,6 +14,41 @@
 
 <div id="navbar-container"></div>
 
+<section class="movie-tools">
+  <div class="tools-header">
+    <h2 class="section-title">Discover Shows</h2>
+    <p id="resultCount"></p>
+  </div>
+
+  <div class="catalog-actions">
+    <button id="filterToggle" type="button">Filters</button>
+    <button id="showAll" type="button">All Shows</button>
+  </div>
+
+  <div class="controls-row">
+    <input type="search" id="showSearch" placeholder="Search title or genre">
+
+    <select id="genreFilter" aria-label="Filter by genre">
+      <option value="all">All Genres</option>
+    </select>
+
+    <select id="sortFilter" aria-label="Sort shows">
+      <option value="rating-desc">Top Rated</option>
+      <option value="year-desc">Newest</option>
+      <option value="title-asc">A to Z</option>
+      <option value="rating-asc">Lowest Rated</option>
+    </select>
+
+    <button id="clearFilters" type="button">Clear</button>
+  </div>
+
+  <div class="genre-chips" id="genreChips"></div>
+</section>
+
+<section>
+  <h2 class="section-title">Featured Shows</h2>
+  <div class="row featured-row" id="featured"></div>
+</section>
 
 <section>
   <h2 class="section-title">Top 10 Shows</h2>
@@ -43,9 +78,12 @@
 
 <template id="card">
   <div class="movie-card">
+    <button class="card-watchlist" type="button" title="Add to watchlist">+</button>
+    <span class="movie-badge"></span>
     <img class="poster">
     <div class="movie-info">
       <h4 class="title"></h4>
+      <p class="meta"></p>
       <p class="rating"></p>
       <p class="genre"></p>
       <span class="review"></span>
@@ -60,10 +98,10 @@
     <div class="category-row cat-row"></div>
   </div>
 </template>
-<script src="../js/watchlist.js"></script>
-<script src="../js/loadcomponent.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="../js/shows.js"></script>
+<script src="../js/watchlist.js?v=3"></script>
+<script src="../js/loadcomponent.js"></script>
+<script src="../js/shows.js?v=6"></script>
 
 </body>
 </html>

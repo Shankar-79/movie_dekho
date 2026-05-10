@@ -1,4 +1,3 @@
-
 *{
 margin:0;
 padding:0;
@@ -105,4 +104,35 @@ font-size:14px;
 font-weight:bold;
 text-decoration:none;
 color:black;
+}
+
+
+
+.input-group input.field-ok {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+
+.input-group input.field-error {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+
+#formMsg,
+#signupMsg {
+  margin-top: 12px;
+  font-size: 13px;
+  min-height: 18px;
+  text-align: center;
+}
+
+#formMsg.error-msg,
+#signupMsg.error-msg {
+  color: #ef4444;
+}
+
+#formMsg.success-msg,
+#signupMsg.success-msg {
+  color: #22c55e;
 }

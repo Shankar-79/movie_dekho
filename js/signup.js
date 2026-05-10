@@ -1,18 +1,19 @@
+
+
 $(document).ready(function () {
 
   const form = $("#signupForm");
 
- 
-  form.find("input").on("input", function () {
-    const val = $(this).val().trim();
 
-    if (val.length === 0) {
-      $(this).removeClass("field-ok").addClass("field-error");
-    } else {
+  form.find("input").on("input", function () {
+    if ($(this).val().trim() !== "") {
       $(this).removeClass("field-error").addClass("field-ok");
+    } else {
+      $(this).removeClass("field-ok").addClass("field-error");
     }
   });
 
+  
   form.on("submit", function (e) {
     e.preventDefault();
 
@@ -20,29 +21,32 @@ $(document).ready(function () {
     const email    = form.find('[name="email"]').val().trim();
     const password = form.find('[name="password"]').val().trim();
 
-    if (username === "" || email === "" || password === "") {
-      $("#signupMsg").text("Please fill all fields.").addClass("error-msg");
+    if (!username || !email || !password) {
+      $("#signupMsg").text("Please fill all fields.").attr("class", "error-msg");
       return;
     }
-
     if (password.length < 4) {
-      $("#signupMsg").text("Password must be at least 4 characters.").addClass("error-msg");
+      $("#signupMsg").text("Password must be at least 4 characters.").attr("class", "error-msg");
       return;
     }
 
-    const userData = { username, email, password };
-    localStorage.setItem("userAccount", JSON.stringify(userData));
-
-   
-    $("#signupMsg")
-      .text("Signup successful! Redirecting to login...")
-      .removeClass("error-msg")
-      .addClass("success-msg");
-
-    setTimeout(() => {
-      window.location.href = "login.html";
-    }, 800);
-
+    $.ajax({
+      url:         "../api.php?action=signup",
+      method:      "POST",
+      contentType: "application/json",
+      data:        JSON.stringify({ username, email, password }),
+      success: function (res) {
+        if (res.success) {
+          $("#signupMsg").text("Signup successful! Redirecting...").attr("class", "success-msg");
+          setTimeout(() => { window.location.href = "login.html"; }, 800);
+        } else {
+          $("#signupMsg").text(res.message).attr("class", "error-msg");
+        }
+      },
+      error: function () {
+        $("#signupMsg").text("Server error. Is XAMPP running?").attr("class", "error-msg");
+      }
+    });
   });
 
 });

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoviesDekho - Profile</title>
+  <link rel="stylesheet" href="../css/navbar.css?v=10">
+  <link rel="stylesheet" href="../css/profile.css?v=7">
+  <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
+</head>
+<body class="profile-page">
+  <div id="navbar-container"></div>
+
+  <main class="profile-shell">
+    <section class="profile-hero">
+      <div class="profile-avatar-card">
+        <img id="avatarPreview" src="../assets/img/user.png" alt="Profile avatar">
+        <button id="customizeBtn" type="button">Customize Profile</button>
+      </div>
+      <div class="profile-copy">
+        <span class="eyebrow">MoviesDekho Profile</span>
+        <h1 id="profileName">Movie Fan</h1>
+        <p id="profileBio">Building a watchlist of thrillers, dramas, action picks, and weekend discoveries.</p>
+        <div class="genre-pills" id="profileGenres"></div>
+      </div>
+    </section>
+
+    <section class="profile-stats" id="profileStats"></section>
+
+    <section class="profile-grid">
+      <article class="profile-panel wide">
+        <div class="panel-head">
+          <span class="eyebrow">Saved library</span>
+          <h2>Your Watchlist Picks</h2>
+          <a href="../pages/mylist.html">Open My List</a>
+        </div>
+        <div class="poster-row" id="savedRow"></div>
+      </article>
+
+      <article class="profile-panel">
+        <span class="eyebrow">Taste profile</span>
+        <h2>Favorite Genres</h2>
+        <div class="genre-cloud" id="tasteGenres"></div>
+      </article>
+
+      <article class="profile-panel">
+        <span class="eyebrow">Activity</span>
+        <h2>Your Reviews</h2>
+        <div class="review-list" id="profileReviews"></div>
+      </article>
+
+      <article class="profile-panel" id="settings">
+        <span class="eyebrow">Quick actions</span>
+        <h2>Profile Tools</h2>
+        <div class="profile-actions">
+          <button id="editProfileAction" type="button">Edit profile</button>
+          <button id="openSavedAction" type="button">Open saved titles</button>
+          <button id="openCelebrityAlertsAction" type="button">Celebrity mail alerts</button>
+        </div>
+        <p class="action-note" id="profileActionNote">Manage saved titles, followed celebrities, favorites, and mail notifications from My List.</p>
+      </article>
+    </section>
+  </main>
+
+  <div class="profile-modal" id="profileModal" aria-hidden="true">
+    <form class="profile-editor" id="profileForm">
+      <button class="modal-close" id="closeProfileModal" type="button" aria-label="Close">&times;</button>
+      <span class="eyebrow">Customize</span>
+      <h2>Edit Profile</h2>
+
+      <label>
+        Username
+        <input id="nameInput" type="text" maxlength="32" placeholder="Movie Fan">
+      </label>
+
+      <label>
+        Bio
+        <textarea id="bioInput" maxlength="140" placeholder="Write a short discovery bio"></textarea>
+      </label>
+
+      <div>
+        <p class="field-label">Favorite genres</p>
+        <div class="genre-picker" id="genrePicker"></div>
+      </div>
+
+      <div>
+        <p class="field-label">Avatar color</p>
+        <div class="avatar-swatches">
+          <button type="button" data-avatar="../assets/img/user.png" class="active">Blue</button>
+          <button type="button" data-avatar="../assets/img/favicon.png">Red</button>
+        </div>
+      </div>
+
+      <button class="save-profile" type="submit">Save Profile</button>
+    </form>
+  </div>
+
+  <div class="toast" id="profileToast"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="../js/loadcomponent.js"></script>
+  <script src="../js/profile.js?v=6"></script>
+</body>
+</html>

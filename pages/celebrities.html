@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoviesDekho - Celebrities</title>
+  <link rel="stylesheet" href="../css/navbar.css?v=10">
+  <link rel="stylesheet" href="../css/celebrities.css?v=7">
+  <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
+</head>
+<body class="static-page celebrities-page">
+  <div id="navbar-container"></div>
+
+  <main class="celebrity-shell">
+    <section class="celebrity-hero">
+      <div>
+        <span class="eyebrow">Celebrity hub</span>
+        <h1>Discover actresses, icons, and voices</h1>
+        <p>Browse verified celebrity profiles with film highlights, public career details, and official profile links.</p>
+      </div>
+      <div class="hero-stats" id="heroStats"></div>
+    </section>
+
+    <section class="celebrity-tools">
+      <div>
+        <span class="eyebrow">Find talent</span>
+        <h2>Actress & Celebrity Directory</h2>
+        <p id="resultCount">Loading celebrities...</p>
+      </div>
+      <div class="tool-grid">
+        <input id="celebritySearch" type="search" placeholder="Search actresses, roles, countries">
+        <select id="countryFilter" aria-label="Source filter">
+          <option value="all">All Countries</option>
+        </select>
+        <select id="professionFilter" aria-label="Profession filter">
+          <option value="all">All Professions</option>
+        </select>
+        <select id="sortFilter" aria-label="Sort celebrities">
+          <option value="popularity">Popularity</option>
+          <option value="trending">Trending</option>
+          <option value="rating">Fan Rating</option>
+          <option value="name">Name</option>
+        </select>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Hot right now</span>
+          <h2>Trending Celebrities</h2>
+        </div>
+      </div>
+      <div class="celebrity-row" id="trendingRow"></div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Full catalog</span>
+          <h2>Popular Celebrities</h2>
+        </div>
+      </div>
+      <div class="celebrity-grid" id="celebrityGrid"></div>
+    </section>
+  </main>
+
+  <template id="celebrityCard">
+    <article class="celebrity-card">
+      <button class="follow-btn" type="button">Follow</button>
+      <img class="celeb-img" loading="lazy" alt="">
+      <div class="celeb-info">
+        <span class="verified">Verified</span>
+        <h3 class="celeb-name"></h3>
+        <p class="celeb-meta"></p>
+        <p class="celeb-known"></p>
+        <div class="score-line">
+          <span class="popularity"></span>
+          <span class="fan-rating"></span>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <div class="toast" id="toast"></div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="../js/loadcomponent.js"></script>
+  <script src="../js/celebrities.js?v=7"></script>
+</body>
+</html>
